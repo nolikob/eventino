@@ -6,8 +6,9 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import './App.css';
+import './App.scss';
 import Navbar from './app/Navbar';
+import { CalendarOverview } from './features/calendar/CalendarOverview';
 
 function App() {
   return (
@@ -18,11 +19,7 @@ function App() {
           <Route
             exact
             path={"/"}
-            render={() => (
-              <>
-                Hello
-              </>
-            )}
+            component={CalendarOverview}
           />
           <Redirect to={"/"} />
         </Switch>

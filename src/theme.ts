@@ -7,8 +7,13 @@ export const theme: Theme = {
         monospace: 'Menlo, monospace',
     },
     colors: {
-        text: '#000',
-        background: '#fff',
+        text: '#FFF',
+        background: '#222639',
         primary: '#33e',
     },
+    buttons: {
+        secondaryOutline: {
+            
+        }
+    }
 }

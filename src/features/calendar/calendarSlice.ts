@@ -1,4 +1,5 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 
 const calendarAdapter = createEntityAdapter();
 
@@ -17,3 +18,7 @@ const calendarSlice = createSlice({
 });
 
 export default calendarSlice.reducer;
+
+export const getInterval = (store: RootState) => store.calendar.selectedInterval;
+
+export const getCurrentDate = (store: RootState) => store.calendar.currentDate;

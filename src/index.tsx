@@ -4,9 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import store from "./app/store";
+import { store } from "./app/store";
 import { ThemeProvider } from 'theme-ui'
-import { theme } from '../theme';
+import { theme } from './theme';
 
 ReactDOM.render(
   <React.StrictMode>
