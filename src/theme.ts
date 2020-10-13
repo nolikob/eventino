@@ -13,7 +13,10 @@ export const theme: Theme = {
     },
     buttons: {
         secondaryOutline: {
-            
+            border: "1px solid",
+            borderColor: "primary",
+            fontWeight: "bold",
+            backgroundColor: "transparent",
         }
     }
 }

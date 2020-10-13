@@ -14,8 +14,14 @@ const initialState = calendarAdapter.getInitialState<{
 const calendarSlice = createSlice({
     name: 'calendar',
     initialState,
-    reducers: {}
+    reducers: {
+        changeSelectedInterval(state, action) {
+            state.selectedInterval = action.payload;
+        },
+    }
 });
+
+export const { changeSelectedInterval } = calendarSlice.actions;
 
 export default calendarSlice.reducer;
 

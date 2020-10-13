@@ -1,15 +1,33 @@
 /** @jsx jsx */
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { getCurrentDate, getInterval } from "./calendarSlice";
-import { Button, jsx } from "theme-ui";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, jsx, Select } from "theme-ui";
 import moment from "moment";
 
+import { changeSelectedInterval, getCurrentDate, getInterval } from "./calendarSlice";
+
+import MonthOverview from "./MonthOverview"; 
+
 export const CalendarOverview: React.FC = () => {
+    moment.locale("cs");
     const selectedInterval = useSelector(getInterval);
     const currentDate = useSelector(getCurrentDate);
+    const dispatch = useDispatch();
     const [ distanceFromCurrent, setDistanceFromCurrent ] = useState<number>(0);
-    const display = moment(currentDate)
+    let selectedDate = moment(currentDate).add(distanceFromCurrent, selectedInterval);
+    let display = "";
+
+    switch (selectedInterval) {
+        case "month":
+            display = selectedDate.format("MMMM - YYYY")
+            break;
+        case "week":
+            display = `${selectedDate.startOf("week").format("DD.MM")} - ${selectedDate.endOf("week").format("DD.MM")} ${selectedDate.format("YYYY")}`
+            break;
+        default:
+            display = `${selectedDate.format("DD.MM.")} ${selectedDate.format("YYYY")}`
+            break;
+    }
 
     return <div sx={{
         display: "flex",
@@ -23,23 +41,43 @@ export const CalendarOverview: React.FC = () => {
             justifyContent: "center",
             alignItems: "center"
         }}>
-            <Button
-                type={"button"}
-                variant={"secondary-outline"}
-                onClick={() => setDistanceFromCurrent(prev => prev - 1)}
+            <div sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Button
+                    type={"button"}
+                    variant={"secondaryOutline"}
+                    onClick={() => setDistanceFromCurrent(prev => prev - 1)}
+                >
+                    {"<"}
+                </Button>
+                <span sx={{ mx: 4 }}>{display}</span>
+                <Button
+                    type={"button"}
+                    variant={"secondaryOutline"}
+                    onClick={() => setDistanceFromCurrent(prev => prev + 1)}
+                >
+                    {">"}
+                </Button>
+            </div>
+            <Select
+                defaultValue={selectedInterval}
+                onChange={e =>  dispatch(changeSelectedInterval(e.target.value))}
+                sx={{
+                    width: "6rem",
+                    ml: "auto",
+                    mr: 0,
+                    p: 2
+                }}
             >
-                {"<"}
-            </Button>
-            <span sx={{ mx: 4 }}>{currentDate}</span>
-            <Button
-                type={"button"}
-                variant={"secondary-outline"}
-                onClick={() => setDistanceFromCurrent(prev => prev + 1)}
-            >
-                {">"}
-            </Button>
+                <option value={"month"}>Month</option>
+                <option value={"week"}>Week</option>
+                <option value={"day"}>Day</option>
+            </Select>
         </div>
-        {selectedInterval === "month"}
+        {selectedInterval === "month" && <MonthOverview dateSpan={selectedDate.format()} />}
         {selectedInterval === "week"}
         {selectedInterval === "day"}
     </div>;
