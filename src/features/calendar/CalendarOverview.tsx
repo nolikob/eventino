@@ -9,6 +9,7 @@ import { changeSelectedInterval, selectCurrentInterval, selectInterval } from ".
 import MonthOverview from "./MonthOverview"; 
 import WeekOverview from "./WeekOverview";
 import DayOverview from "./DayOverview";
+import { Link } from "react-router-dom";
 
 export const CalendarOverview: React.FC = () => {
     const selectedInterval = useSelector(selectInterval);
@@ -17,6 +18,7 @@ export const CalendarOverview: React.FC = () => {
     const [ distanceFromCurrent, setDistanceFromCurrent ] = useState<number>(0);
     let selectedDate = moment(currentDate).add(distanceFromCurrent, selectedInterval);
     let display = "";
+    const today = moment().format();
 
     switch (selectedInterval) {
         case "month":
@@ -84,7 +86,10 @@ export const CalendarOverview: React.FC = () => {
                 <option value={"day"}>Day</option>
             </Select>
         </div>
-        {selectedInterval === "month" && <MonthOverview dateSpan={selectedDate.format()} />}
+        {selectedInterval === "month" && <MonthOverview 
+            dateSpan={selectedDate.format()}
+            today={today}
+        />}
         {selectedInterval === "week" && <WeekOverview dateSpan={selectedDate.format()} />}
         {selectedInterval === "day" && <DayOverview dateSpan={selectedDate.format()} />}
     </div>;

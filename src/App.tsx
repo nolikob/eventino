@@ -9,6 +9,7 @@ import {
 import './App.scss';
 import Navbar from './app/Navbar';
 import { CalendarOverview } from './features/calendar/CalendarOverview';
+import AddEvent from './features/events/AddEvent';
 
 function App() {
   return (
@@ -20,6 +21,11 @@ function App() {
             exact
             path={"/"}
             component={CalendarOverview}
+          />
+          <Route
+            exact
+            path={"/events/add-event"}
+            component={AddEvent}
           />
           <Redirect to={"/"} />
         </Switch>

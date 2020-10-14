@@ -18,6 +18,6 @@ export const theme: Theme = {
             fontWeight: "bold",
             backgroundColor: "transparent",
             cursor: "pointer"
-        }
+        },
     }
 }

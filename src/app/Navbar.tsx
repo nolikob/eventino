@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React from "react";
+import { Link } from "react-router-dom";
 import { jsx } from "theme-ui";
 
 const Navbar: React.FC = () => {
@@ -13,7 +14,10 @@ const Navbar: React.FC = () => {
         justifyContent: "center",
         fontSize: "2rem",
     }}>
-        Eventino
+        <Link to={"/"} sx={{
+            textDecoration: "none",
+            color: "text",
+        }}>Eventino</Link>
     </nav>
 };
 
