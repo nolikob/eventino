@@ -8,6 +8,7 @@ import { changeSelectedInterval, selectCurrentInterval, selectInterval } from ".
 
 import MonthOverview from "./MonthOverview"; 
 import WeekOverview from "./WeekOverview";
+import DayOverview from "./DayOverview";
 
 export const CalendarOverview: React.FC = () => {
     const selectedInterval = useSelector(selectInterval);
@@ -85,6 +86,6 @@ export const CalendarOverview: React.FC = () => {
         </div>
         {selectedInterval === "month" && <MonthOverview dateSpan={selectedDate.format()} />}
         {selectedInterval === "week" && <WeekOverview dateSpan={selectedDate.format()} />}
-        {selectedInterval === "day"}
+        {selectedInterval === "day" && <DayOverview dateSpan={selectedDate.format()} />}
     </div>;
 }
