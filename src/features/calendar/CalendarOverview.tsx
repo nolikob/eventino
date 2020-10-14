@@ -7,6 +7,7 @@ import moment from "moment";
 import { changeSelectedInterval, selectCurrentInterval, selectInterval } from "./calendarSlice";
 
 import MonthOverview from "./MonthOverview"; 
+import WeekOverview from "./WeekOverview";
 
 export const CalendarOverview: React.FC = () => {
     const selectedInterval = useSelector(selectInterval);
@@ -15,8 +16,6 @@ export const CalendarOverview: React.FC = () => {
     const [ distanceFromCurrent, setDistanceFromCurrent ] = useState<number>(0);
     let selectedDate = moment(currentDate).add(distanceFromCurrent, selectedInterval);
     let display = "";
-
-    console.log(selectInterval);
 
     switch (selectedInterval) {
         case "month":
@@ -85,7 +84,7 @@ export const CalendarOverview: React.FC = () => {
             </Select>
         </div>
         {selectedInterval === "month" && <MonthOverview dateSpan={selectedDate.format()} />}
-        {selectedInterval === "week"}
+        {selectedInterval === "week" && <WeekOverview dateSpan={selectedDate.format()} />}
         {selectedInterval === "day"}
     </div>;
 }

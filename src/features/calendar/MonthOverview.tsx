@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Grid, jsx } from "theme-ui";
 import moment from "moment";
 
@@ -12,10 +12,6 @@ const MonthOverview: React.FC<MonthOverviewProps> = ({ dateSpan }) => {
     const daysAfterEnd = 7 - moment(dateSpan).endOf("month").day();
 
     const daysToRender: any[] = [];
-
-    useEffect(() => {
-        daysToRender.splice(0, daysToRender.length);
-    }, [dateSpan, daysToRender])
 
     const amountToRender = moment(dateSpan).daysInMonth() + daysAfterEnd;
 
