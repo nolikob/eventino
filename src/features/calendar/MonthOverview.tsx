@@ -17,32 +17,10 @@ const MonthOverview: React.FC<MonthOverviewProps> = ({ dateSpan }) => {
         daysToRender.splice(0, daysToRender.length);
     }, [dateSpan, daysToRender])
 
-    for (let index = daysBeforeStart; index > 0; index--) {
-        const value = moment(dateSpan).startOf("month").subtract(index, "day")
-        daysToRender.push(
-            <Box key={value.format("DD/MM/YYYY")} p={{
-                    x: "70px",
-                    y: "65px"
-                }}>
-                {value.format("DD")}
-            </Box>
-        )
-    }
+    const amountToRender = moment(dateSpan).daysInMonth() + daysAfterEnd;
 
-    for (let index = 0; index < moment(dateSpan).daysInMonth(); index++) {
+    for (let index = -daysBeforeStart; index < amountToRender; index++) {
         const value = moment(dateSpan).startOf("month").add(index, "day")
-        daysToRender.push(
-            <Box key={value.format("DD/MM/YYYY")} p={{
-                    x: "70px",
-                    y: "65px"
-                }}>
-                {value.format("DD")}
-            </Box>
-        )
-    }
-
-    for (let index = 1; index <= daysAfterEnd; index++) {
-        const value = moment(dateSpan).endOf("month").add(index, "day")
         daysToRender.push(
             <Box key={value.format("DD/MM/YYYY")} p={{
                     x: "70px",
