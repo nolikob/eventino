@@ -52,19 +52,21 @@ const MonthOverview: React.FC<MonthOverviewProps> = ({ dateSpan }) => {
             </Box>
         )
     }
-    
-    return <Grid gap={0} columns={7}>
-        <Box>Monday</Box>
-        <Box>Tuesday</Box>
-        <Box>Wednesday</Box>
-        <Box>Thursday</Box>
-        <Box>Friday</Box>
-        <Box>Saturday</Box>
-        <Box>Sunday</Box>
-        {daysToRender}
-        {/* <Grid gap={0} columns={7}>
-        </Grid> */}
-    </Grid>;
+
+    return <div>
+        <Grid gap={0} columns={7}>
+            <Box>Monday</Box>
+            <Box>Tuesday</Box>
+            <Box>Wednesday</Box>
+            <Box>Thursday</Box>
+            <Box>Friday</Box>
+            <Box>Saturday</Box>
+            <Box>Sunday</Box>
+        </Grid>
+        <Grid gap={0} columns={7}>
+            {daysToRender}
+        </Grid>
+    </div>
 }
 
 export default MonthOverview;

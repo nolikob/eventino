@@ -39,12 +39,16 @@ export const CalendarOverview: React.FC = () => {
             display: "flex",
             height: "3rem",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            padding: "0 1rem",
+            position: "relative",
         }}>
             <div sx={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                ml: "auto",
+                mr: "auto",
             }}>
                 <Button
                     type={"button"}
@@ -67,9 +71,11 @@ export const CalendarOverview: React.FC = () => {
                 onChange={e =>  dispatch(changeSelectedInterval(e.target.value))}
                 sx={{
                     width: "6rem",
-                    ml: "auto",
-                    mr: 0,
-                    p: 2
+                    position: "absolute",
+                    right: "1rem",
+                    p: 2,
+                    top: 0,
+                    bottom: 0,
                 }}
             >
                 <option value={"month"}>Month</option>

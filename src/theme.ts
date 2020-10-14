@@ -17,6 +17,7 @@ export const theme: Theme = {
             borderColor: "primary",
             fontWeight: "bold",
             backgroundColor: "transparent",
+            cursor: "pointer"
         }
     }
 }
