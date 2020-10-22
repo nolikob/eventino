@@ -1,15 +1,20 @@
-import { createSlice, createEntityAdapter, createSelector } from "@reduxjs/toolkit";
+import { createSlice, createEntityAdapter, createSelector, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
 const calendarAdapter = createEntityAdapter();
 
 const initialState = calendarAdapter.getInitialState<{
-    currentDate: string,
-    selectedInterval: "day" | "week" | "month"
+    selectedInterval: "day" | "week" | "month",
+    selectedDate: string,
 }>({
-    currentDate: new Date().toISOString(),
-    selectedInterval: "month"
+    selectedInterval: "month",
+    selectedDate: new Date().toISOString(),
 });
+
+type IntervalAndDate= {
+    selectedInterval: "day" | "week" | "month",
+    selectedDate: string,
+};
 
 const calendarSlice = createSlice({
     name: 'calendar',
@@ -18,17 +23,28 @@ const calendarSlice = createSlice({
         changeSelectedInterval(state, action) {
             state.selectedInterval = action.payload;
         },
+        changeSelectedDate(state, action) {
+            state.selectedDate = action.payload;
+        },
+        changeIntervalAndDate(state, action: PayloadAction<IntervalAndDate>) {
+            state.selectedInterval = action.payload.selectedInterval;
+            state.selectedDate = action.payload.selectedDate;
+        }
     }
 });
 
-export const { changeSelectedInterval } = calendarSlice.actions;
+export const {
+    changeSelectedInterval,
+    changeSelectedDate,
+    changeIntervalAndDate
+} = calendarSlice.actions;
 
 export default calendarSlice.reducer;
 
 const getInterval = (store: RootState) => store.calendar.selectedInterval;
 
-export const getCurrentDate = (store: RootState) => store.calendar.currentDate;
+const getSelectedDate = (store: RootState) => store.calendar.selectedDate;
 
 export const selectInterval = createSelector(getInterval, res => res);
 
-export const selectCurrentInterval = createSelector(getCurrentDate, res => res);
+export const selectSelectedDate = createSelector(getSelectedDate, res => res);

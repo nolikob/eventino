@@ -4,21 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, jsx, Select } from "theme-ui";
 import moment from "moment";
 
-import { changeSelectedInterval, selectCurrentInterval, selectInterval } from "./calendarSlice";
+import { changeSelectedInterval, selectInterval } from "./calendarSlice";
 
 import MonthOverview from "./MonthOverview"; 
 import WeekOverview from "./WeekOverview";
 import DayOverview from "./DayOverview";
-import { Link } from "react-router-dom";
 
 export const CalendarOverview: React.FC = () => {
     const selectedInterval = useSelector(selectInterval);
-    const currentDate = useSelector(selectCurrentInterval);
     const dispatch = useDispatch();
     const [ distanceFromCurrent, setDistanceFromCurrent ] = useState<number>(0);
-    let selectedDate = moment(currentDate).add(distanceFromCurrent, selectedInterval);
-    let display = "";
     const today = moment().format();
+    let selectedDate = moment(today).add(distanceFromCurrent, selectedInterval);
+    let display = "";
 
     switch (selectedInterval) {
         case "month":
@@ -70,7 +68,7 @@ export const CalendarOverview: React.FC = () => {
                 </Button>
             </div>
             <Select
-                defaultValue={selectedInterval}
+                value={selectedInterval}
                 onChange={e =>  dispatch(changeSelectedInterval(e.target.value))}
                 sx={{
                     width: "6rem",

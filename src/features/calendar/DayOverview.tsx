@@ -2,12 +2,16 @@
 import React from "react";
 import { Box, Grid, jsx } from "theme-ui";
 import moment from "moment";
+import { useSelector } from "react-redux";
+import { selectSelectedDate } from "./calendarSlice";
 
 export type DayOverviewProps = {
     dateSpan: string
 }
 
 const DayOverview: React.FC<DayOverviewProps> = ({dateSpan}) => {
+    const selectedDate = useSelector(selectSelectedDate)
+
     return <div sx={{
         display: "flex",
         flexDirection: "column",
@@ -20,7 +24,7 @@ const DayOverview: React.FC<DayOverviewProps> = ({dateSpan}) => {
                 },
                 flex: "1"
             }}>
-                {moment(dateSpan).format("Do of MMMM")}
+                {moment(selectedDate).format("Do of MMMM")}
             </Box>
         </Grid>
     </div>

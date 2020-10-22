@@ -3,6 +3,9 @@ import React from "react";
 import { Box, Grid, jsx } from "theme-ui";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeSelectedDate } from "../events/eventsSlice";
+import { changeIntervalAndDate } from "./calendarSlice";
 
 export type MonthOverviewProps = {
     dateSpan: string,
@@ -12,6 +15,8 @@ export type MonthOverviewProps = {
 const MonthOverview: React.FC<MonthOverviewProps> = ({ dateSpan, today }) => {
     const daysBeforeStart = moment(dateSpan).startOf("month").day() - 1;
     const daysAfterEnd = 7 - moment(dateSpan).endOf("month").day();
+
+    const dispatch = useDispatch();
 
     const daysToRender: any[] = [];
 
@@ -24,18 +29,29 @@ const MonthOverview: React.FC<MonthOverviewProps> = ({ dateSpan, today }) => {
             <Box key={value.format("DD/MM/YYYY")} p={{
                     x: "70px",
                     y: "65px"
-                }}>
-                <Link sx={{
-                    width: "30px",
-                    height: "30px",
-                    borderRadius: "20px",
-                    display: "block",
-                    color: "text",
-                    lineHeight: "28px",
-                    textDecoration: "none",
-                    backgroundColor: !isToday ? "primary" : "transparent",
-                    margin: "0 auto"
-                }} to={"/events/add-event"}>
+                }}
+                onClick={() => {
+                    dispatch(changeIntervalAndDate({
+                        selectedDate: value.format(),
+                        selectedInterval: "day"
+                    }));
+                }}
+            >
+                <Link
+                    sx={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "20px",
+                        display: "block",
+                        color: "text",
+                        lineHeight: "28px",
+                        textDecoration: "none",
+                        backgroundColor: !isToday ? "primary" : "transparent",
+                        margin: "0 auto"
+                    }}
+                    to={"/events/add-event"}
+                    onClick={() => dispatch(changeSelectedDate(value.format()))}
+                >
                     {value.format("DD")}
                 </Link>
             </Box>
