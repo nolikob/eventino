@@ -17,7 +17,18 @@ const Navbar: React.FC = () => {
         <Link to={"/"} sx={{
             textDecoration: "none",
             color: "text",
+            marginLeft: "auto",
+            marginRight: "auto",
         }}>Eventino</Link>
+        <Link to={"/add-event"} sx={{
+            textDecoration: "none",
+            color: "text",
+            fontSize: "1rem",
+            right: "1rem",
+            position: "absolute"
+        }}>
+            Add event
+        </Link>
     </nav>
 };
 

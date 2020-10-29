@@ -1,5 +1,6 @@
 import { createSlice, createEntityAdapter, createSelector, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
+import moment from "moment";
 
 const calendarAdapter = createEntityAdapter();
 
@@ -8,7 +9,7 @@ const initialState = calendarAdapter.getInitialState<{
     selectedDate: string,
 }>({
     selectedInterval: "month",
-    selectedDate: new Date().toISOString(),
+    selectedDate: moment().format("YYYY-MM-DD"),
 });
 
 type IntervalAndDate= {

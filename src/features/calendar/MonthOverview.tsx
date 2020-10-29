@@ -4,8 +4,7 @@ import { Box, Grid, jsx } from "theme-ui";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { changeSelectedDate } from "../events/eventsSlice";
-import { changeIntervalAndDate } from "./calendarSlice";
+import { changeIntervalAndDate, changeSelectedDate } from "./calendarSlice";
 
 export type MonthOverviewProps = {
     dateSpan: string,
@@ -32,7 +31,7 @@ const MonthOverview: React.FC<MonthOverviewProps> = ({ dateSpan, today }) => {
                 }}
                 onClick={() => {
                     dispatch(changeIntervalAndDate({
-                        selectedDate: value.format(),
+                        selectedDate: value.format("YYYY-MM-DD"),
                         selectedInterval: "day"
                     }));
                 }}
@@ -50,7 +49,10 @@ const MonthOverview: React.FC<MonthOverviewProps> = ({ dateSpan, today }) => {
                         margin: "0 auto"
                     }}
                     to={"/events/add-event"}
-                    onClick={() => dispatch(changeSelectedDate(value.format()))}
+                    onClick={() => dispatch(changeIntervalAndDate({
+                        selectedDate: value.format("YYYY-MM-DD"),
+                        selectedInterval: "day"
+                    }))}
                 >
                     {value.format("DD")}
                 </Link>

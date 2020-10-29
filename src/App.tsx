@@ -24,7 +24,7 @@ function App() {
           />
           <Route
             exact
-            path={"/events/add-event"}
+            path={"/add-event"}
             component={AddEvent}
           />
           <Redirect to={"/"} />
